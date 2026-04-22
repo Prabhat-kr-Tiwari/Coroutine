@@ -6,97 +6,38 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.*
 
 
-/*fun main(): Unit{
-
-    takeOrder("Customer1")
-    cookFood("Customer1")
-    deliverIt("Customer1")
+//main routine
+fun main(): Unit = runBlocking {
 
 
-    takeOrder("Customer2")
-    cookFood("Customer2")
-    deliverIt("Customer2")
+ /*   first()//subroutine
+    second()//subroutine*/
 
-}
-fun takeOrder(name: String) {
-    println("Order has been taken from $name")
-}
-
-fun cookFood(name: String) {
-    println("Food is cooked for $name")
-    Thread.sleep(4000)
-}
-
-fun deliverIt(name: String) {
-    println("food has been delivered for $name")
-}*/
-
-
-//usin multiple threads
-//here task completed very fast as compared to first one
-//but more memory
-/*fun main(): Unit {
-
-    Thread {
-        takeOrder("Customer1")
-        cookFood("Customer1")
-        deliverIt("Customer1")
-    }.start()
-
-
-
-    Thread {
-        takeOrder("Customer2")
-        cookFood("Customer2")
-        deliverIt("Customer2")
-    }.start()
-
-
-}
-
-fun takeOrder(name: String) {
-    println("Order has been taken from $name")
-}
-
-fun cookFood(name: String) {
-    println("Food is cooked for $name")
-    Thread.sleep(4000)
-}
-
-fun deliverIt(name: String) {
-    println("food has been delivered for $name")
-}*/
-
-fun main(): Unit = runBlocking{
-
-    launch {
-        takeOrder("Customer1")
-        cookFood("Customer1")
-        deliverIt("Customer1")
+    launch {//coroutine
+        first()
     }
-
-
-
-
-    launch {
-        takeOrder("Customer2")
-        cookFood("Customer2")
-        deliverIt("Customer2")
+    launch {  //coroutine
+        second()
     }
-
-
-
 }
 
-suspend fun takeOrder(name: String) {
-    println("Order has been taken from $name")
+suspend fun first() {
+
+    var first = 0;
+    while (true) {
+
+        println("first  ${first++}")
+        delay(1000)
+    }
 }
 
-suspend fun cookFood(name: String) {
-    println("Food is cooked for $name")
-    delay(4000)
+suspend fun second() {
+
+    var second = 0;
+    while (true) {
+        println("second  ${second++}")
+        delay(2000)
+
+    }
 }
 
-suspend  fun deliverIt(name: String) {
-    println("food has been delivered for $name")
-}

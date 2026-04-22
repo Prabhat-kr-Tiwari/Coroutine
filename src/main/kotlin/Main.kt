@@ -17,14 +17,25 @@ import kotlinx.coroutines.*
     cookFood("Customer2")
     deliverIt("Customer2")
 
+}
+fun takeOrder(name: String) {
+    println("Order has been taken from $name")
+}
+
+fun cookFood(name: String) {
+    println("Food is cooked for $name")
+    Thread.sleep(4000)
+}
+
+fun deliverIt(name: String) {
+    println("food has been delivered for $name")
 }*/
 
 
 //usin multiple threads
 //here task completed very fast as compared to first one
 //but more memory
-/*
-fun main(): Unit {
+/*fun main(): Unit {
 
     Thread {
         takeOrder("Customer1")

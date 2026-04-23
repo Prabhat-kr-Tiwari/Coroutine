@@ -6,38 +6,57 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.*
 
 
-//main routine
+/*fun main(): Unit {
+    println("start")
+    runBlocking {
+        val first = getUserInfo("1", 1000)
+        println(first)
+        val second = getUserInfo("2", 1000)
+        println(second)
+    }
+    println("end")
+}*/
+/*fun main(): Unit= runBlocking {
+    println("start")
+    launch{
+        val first = getUserInfo("first", 1000)
+        println(first)
+        val second = getUserInfo("second", 1000)
+        println(second)
+    }
+    println("end")
+}*/
+/*fun main(): Unit = runBlocking {
+    println("start")
+
+    val first = async {
+        getUserInfo("first", 1000)
+    }
+    println(first.await())
+    val second = async {
+        getUserInfo("second", 1000)
+    }
+    println(second.await())
+
+    println("end")
+}*/
 fun main(): Unit = runBlocking {
+    println("start")
 
-
- /*   first()//subroutine
-    second()//subroutine*/
-
-    launch {//coroutine
-        first()
+    val first = async {
+        getUserInfo("first", 4000)
     }
-    launch {  //coroutine
-        second()
-    }
+    delay(3000)
+    println(first.getCompleted())
+
+
+    println("end")
 }
 
-suspend fun first() {
-
-    var first = 0;
-    while (true) {
-
-        println("first  ${first++}")
-        delay(1000)
-    }
+suspend fun getUserInfo(userId: String, delay: Long): String {
+    delay(delay)
+    return userId;
 }
 
-suspend fun second() {
 
-    var second = 0;
-    while (true) {
-        println("second  ${second++}")
-        delay(2000)
-
-    }
-}
 

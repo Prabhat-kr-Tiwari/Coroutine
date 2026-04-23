@@ -4,55 +4,38 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.*
+import kotlin.concurrent.fixedRateTimer
 import kotlin.coroutines.CoroutineContext
 
 
-/*fun main():Unit = runBlocking {
+/*fun main(): Unit = runBlocking {
 
-    coroutineScope {
-        launch {
-            println("first")
-        }
-        *//*launch {
-            throw Exception("Unhandle exception")
-        }*//*
-        launch {
-            println("second")
-        }
-    }
+//    launch(Dispatchers.Default) {
+//    launch(Dispatchers.IO) {
+    launch(Dispatchers.Unconfined) {
 
-    supervisorScope {
-        launch {
-            println("supervisorScope  first")
-        }
-        launch {
-            throw Exception("Unhandle exception")
-        }
-        launch {
-            println("supervisorScope   second")
-        }
+        println("first ${Thread.currentThread().name}")
+        delay(1000)
+        println("second ${Thread.currentThread().name}")
     }
 }*/
 
-fun main():Unit = runBlocking {
+fun main():Unit= runBlocking{
 
-    supervisorScope {
+    launch(Dispatchers.Unconfined) {
 
-    val dispatcher = Dispatchers.IO
-    val job = Job()
-    val coroutineExceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+        println("first ${Thread.currentThread().name}")
+      val frist =  withContext(Dispatchers.IO){
 
-        println("${throwable.message}")
+            println("with context ${Thread.currentThread().name}")
+            delay(100)
+            return@withContext 4
 
-    }
-    val  coroutineContext=dispatcher+coroutineExceptionHandler
-
-    launch(context = coroutineContext) {
-
-        throw Exception("unhandle")
-    }
+        }
+        println(frist)
 
     }
+
 }
 
 
